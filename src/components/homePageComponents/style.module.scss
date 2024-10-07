@@ -1,0 +1,50 @@
+// style.module.scss
+
+$easy-gradient: radial-gradient(circle, #a8e0a1, #69d45b);
+$medium-gradient: radial-gradient(circle, #fcd498, #ffcc80);
+$hard-gradient: radial-gradient(circle, #f8a4a2, #ff6666);
+
+.Card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 8rem;
+  width: 100%;
+  max-height: 6rem;
+  border-radius: 10%;
+  padding: 0.5rem 2rem;
+  transition: all 0.3s ease-in-out;
+
+  &--easy {
+    background: $easy-gradient;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(105, 212, 91, 0.8);
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &--medium {
+    background: $medium-gradient;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &--hard {
+    background: $hard-gradient;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(255, 102, 102, 0.8);
+      transition: all 0.3s ease-in-out;
+    }
+  }
+}

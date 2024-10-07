@@ -1,0 +1,34 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo '🏗️👷 Styling, testing, and building your project before committing'
+
+# Check Prettier standards
+npx prettier --check '**/*.{js,jsx,ts,tsx,json,css,md}' ||
+(
+    echo 'Your code is not formatted correctly.'
+    echo 'Run `npm run format`, add changes, and try to commit again.'
+    exit 1
+)
+
+# Check ESLint standards (use glob pattern)
+npx eslint '**/*.{js,jsx,ts,tsx}' || (
+    echo 'ESLint Check Failed. Fix the issues and try to commit again.'
+    exit 1
+)
+
+# Check tsconfig standards
+npx tsc --noEmit || (
+    echo 'TypeScript check failed. Make the changes required.'
+    exit 1
+)
+
+# Build
+echo '... Alright.... Code looks good to me... Trying to build now.'
+npx vite build || (
+    echo '👷 Build failed. Check the errors above.'
+    exit 1
+)
+
+# If everything passes, commit
+echo '✅✅✅✅ You win this time... I am committing this now. ✅✅✅✅'

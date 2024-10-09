@@ -3,14 +3,18 @@ import { Difficulty } from '../../types/gameSettings';
 import style from './style.module.scss';
 
 export function HomePage() {
+  const difficulty = Object.values(Difficulty).filter(
+    (val) => typeof val === 'number'
+  );
+
   return (
     <div className={style.HomePage}>
       <h1>Memory Game</h1>
       <h2>Select Difficulty LvL</h2>
       <div className={style.CardContainer}>
-        <DifficultyLvlCard difficulty={Difficulty.EASY} />
-        <DifficultyLvlCard difficulty={Difficulty.MEDIUM} />
-        <DifficultyLvlCard difficulty={Difficulty.HARD} />
+        {difficulty.map((lvl) => (
+          <DifficultyLvlCard key={lvl} difficulty={lvl} />
+        ))}
       </div>
     </div>
   );

@@ -2,11 +2,11 @@ import style from './style.module.scss';
 import { Difficulty } from '../../types/gameSettings';
 import { useChangeDifficulty } from '../../utils/changeDifficulty';
 
-type DifficultyLvlCardProps = {
+export const DifficultyLvlCard = ({
+  difficulty,
+}: {
   difficulty: Difficulty;
-};
-
-export const DifficultyLvlCard = ({ difficulty }: DifficultyLvlCardProps) => {
+}) => {
   const changeDifficulty = useChangeDifficulty();
   const handleClick = () => {
     changeDifficulty(difficulty);

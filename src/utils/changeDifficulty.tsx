@@ -7,7 +7,6 @@ export const useChangeDifficulty = () => {
 
   const changeDifficulty = (difficulty: Difficulty) => {
     useMemoryGameStore.setState({ difficulty });
-    console.log(useMemoryGameStore.getState().difficulty);
     navigate('/theme-selection');
   };
 

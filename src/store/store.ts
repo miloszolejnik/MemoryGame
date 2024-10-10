@@ -1,6 +1,11 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { MemoryGameState, CardTheme, Difficulty } from '../types/gameSettings';
+import {
+  MemoryGameState,
+  CardTheme,
+  Difficulty,
+  CardStructure,
+} from '../types/gameSettings';
 
 export const useMemoryGameStore = create<MemoryGameState>()(
   devtools((set) => ({
@@ -9,10 +14,14 @@ export const useMemoryGameStore = create<MemoryGameState>()(
     score: 0,
     moves: 0,
     cardTheme: CardTheme.SET_ONE,
+    selectedCard: null,
+    cardsInUse: [],
     setDifficulty: (difficulty: Difficulty) => set({ difficulty }),
     setTime: (time: number) => set({ time }),
     setScore: (score: number) => set({ score }),
     setMoves: (moves: number) => set({ moves }),
     setCardTheme: (cardTheme: CardTheme) => set({ cardTheme }),
+    setSelectedCard: (selectedCard: string | null) => set({ selectedCard }),
+    setCardsInUse: (cardsInUse: CardStructure[]) => set({ cardsInUse }),
   }))
 );

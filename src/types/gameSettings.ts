@@ -1,7 +1,25 @@
+import { ReactElement } from 'react';
+
+export type CardStructure = {
+  backgroundImage: string;
+  icon: ReactElement | string;
+  id: number;
+  isMatched: boolean;
+  isFlipped: boolean;
+};
+
+export type CardThemes = {
+  [key in CardTheme]: {
+    name: string;
+    cardBackround: string;
+    cards: CardStructure[];
+  };
+};
+
 export enum Difficulty {
-  EASY = 1,
-  MEDIUM = 2,
-  HARD = 3,
+  EASY = 'EASY',
+  MEDIUM = 'MEDIUM',
+  HARD = 'HARD',
 }
 
 export enum CardTheme {
@@ -10,10 +28,20 @@ export enum CardTheme {
   SET_THREE = 'SET_THREE',
   SET_CUSTOM = 'SET_CUSTOM',
 }
+
 export type MemoryGameState = {
   difficulty: Difficulty;
   time: number;
   score: number;
   moves: number;
   cardTheme: CardTheme;
+  selectedCard: string | null;
+  cardsInUse: CardStructure[];
+  setDifficulty: (difficulty: Difficulty) => void;
+  setTime: (time: number) => void;
+  setScore: (score: number) => void;
+  setMoves: (moves: number) => void;
+  setCardTheme: (cardTheme: CardTheme) => void;
+  setSelectedCard: (selectedCard: string | null) => void;
+  setCardsInUse: (cardsInUse: CardStructure[]) => void;
 };

@@ -3,9 +3,7 @@ import { Difficulty } from '../../types/gameSettings';
 import style from './style.module.scss';
 
 export function HomePage() {
-  const difficulty = Object.values(Difficulty).filter(
-    (val) => typeof val === 'number'
-  );
+  const difficulty = Object.values(Difficulty);
 
   return (
     <div className={style.HomePage}>

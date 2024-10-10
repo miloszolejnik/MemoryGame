@@ -21,15 +21,7 @@ export const DifficultyLvlCard = ({
 
   return (
     <div className={`${style.Card} ${bacground}`} onClick={handleClick}>
-      <h2>
-        {difficulty
-          ? difficulty === Difficulty.EASY
-            ? 'Easy'
-            : difficulty === Difficulty.MEDIUM
-              ? 'Medium'
-              : 'Hard'
-          : ''}
-      </h2>
+      <h2>{difficulty}</h2>
     </div>
   );
 };

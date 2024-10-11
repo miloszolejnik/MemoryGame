@@ -5,11 +5,12 @@ import { GameCard } from './GameCard';
 import style from './style.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { loadGameState } from '../../utils/gameSave';
+import { CongarulationsMessage } from './congarulationsMessage';
 
 export const GameScene = () => {
   const [disable, setDisable] = useState(false);
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true); // Track loading state
+  const [isLoading, setIsLoading] = useState(true);
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export const GameScene = () => {
       navigate('/');
     }
 
-    setIsLoading(false); // Set loading to false after processing
+    setIsLoading(false);
   }, [navigate]);
 
   const gameTable = useMemoryGameStore((state) => state.cardsInUse);
@@ -45,17 +46,12 @@ export const GameScene = () => {
   }
 
   if (isLoading || !gameTable) {
-    return null; // Optionally, you can return a loading indicator here
+    return null;
   }
 
   return (
     <div>
-      {allCardsMatched && (
-        <div className={style.YouWin}>
-          <h1>✨YOU WIN✨</h1>
-          <button onClick={() => navigate('/')}>PLAY AGAIN</button>
-        </div>
-      )}
+      {allCardsMatched && <CongarulationsMessage />}
       <div className={style.GameScene} data-grid-size={gridSize}>
         {gameTable.map((card: CardStructure, index: number) => (
           <GameCard

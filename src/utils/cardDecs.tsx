@@ -29,6 +29,8 @@ import {
   WifiIcon,
   XIcon,
   ZoomInIcon,
+  ThumbsDownIcon,
+  WindIcon,
 } from 'lucide-react';
 import { CardThemes } from '../types/gameSettings';
 import defaultBG from '../assets/defaultBG.svg';
@@ -215,6 +217,18 @@ export const cardThemes = {
       {
         backgroundImage: 'linear-gradient(300deg, #33FFC3, #FF57A6)',
         icon: <ZoomInIcon />,
+        isMatched: false,
+        isFlipped: false,
+      },
+      {
+        backgroundImage: 'linear-gradient(45deg, #FF7F50, #FFD700)',
+        icon: <ThumbsDownIcon />,
+        isMatched: false,
+        isFlipped: false,
+      },
+      {
+        backgroundImage: 'linear-gradient(135deg, #1E90FF, #00BFFF)',
+        icon: <WindIcon />,
         isMatched: false,
         isFlipped: false,
       },

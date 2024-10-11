@@ -1,10 +1,9 @@
 .GameSettings {
   display: flex;
   flex-direction: column;
-  border: solid whitesmoke 1px;
   padding: 1rem 2rem;
   gap: 1rem;
-  width: 20%;
+  margin-bottom: 1rem;
   .Setting {
     display: flex;
     justify-content: space-between;
@@ -12,14 +11,9 @@
   }
 }
 .GameScene {
-  width: fit-content;
   display: grid;
   gap: 1rem;
-  border: solid ghostwhite 1px;
-  padding: 2rem 2rem;
-
-  --grid-columns: 4;
-
+  justify-content: center;
   &[data-grid-size='4'] {
     --grid-columns: 4;
   }
@@ -32,29 +26,41 @@
     --grid-columns: 8;
   }
 
-  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 10rem));
 }
 
 .GameCardContainer {
   position: relative;
+  display: flex;
   max-height: 10rem;
   max-width: 10rem;
-  min-width: 2rem;
-  min-height: 2rem;
+  min-height: 1rem;
+  min-width: 1rem;
+  width: auto;
+  height: auto;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   cursor: pointer;
+  border-radius: 5%;
+
+  &[data-card-error='true'] {
+    animation: shake 0.5s ease-in-out 1;
+  }
 }
 
 .GameCard {
-  position: absolute;
+  position: relative;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  border: solid ghostwhite 1px;
   background-size: cover;
   background-position: center;
+  transform: rotateY(90deg);
+  transition: all 0.2s ease-in;
 
   &[data-card-background-type='gradient'] {
     background: var(--background-value);
@@ -84,7 +90,8 @@
   height: 100%;
   background-size: cover;
   background-position: center;
-  border: solid rgba(248, 248, 255, 0.068) 1px;
+  transition: all 0.2s ease-in;
+  transition-delay: 0.2s;
 }
 
 .flipped {
@@ -92,7 +99,29 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    visibility: hidden;
-    border-color: red;
+    transform: rotateY(90deg);
+    transition-delay: 0.2s;
+  }
+  .GameCard {
+    transform: rotateY(0deg);
+    transition-delay: 0.2s;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }

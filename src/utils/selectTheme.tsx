@@ -7,7 +7,6 @@ export const useSelectTheme = () => {
 
   const changeTheme = (theme: CardTheme) => {
     useMemoryGameStore.setState({ cardTheme: theme });
-    console.log(useMemoryGameStore.getState());
     navigate('/game');
   };
 

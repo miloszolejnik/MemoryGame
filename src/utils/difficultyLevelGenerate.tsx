@@ -8,7 +8,6 @@ export function difficultyLevelGenerate() {
     .sort(() => Math.random() - 0.5)
     .map((card) => ({ ...card, id: Math.random() }));
   const cardInUse = [];
-
   switch (gameInfo.difficulty) {
     case 'EASY':
       cardInUse.push(...shuffledDeck.slice(0, 8), ...shuffledDeck.slice(0, 8));
@@ -19,8 +18,8 @@ export function difficultyLevelGenerate() {
       return cardInUse;
     case 'MEDIUM':
       cardInUse.push(
-        ...shuffledDeck.slice(0, 16),
-        ...shuffledDeck.slice(0, 16)
+        ...shuffledDeck.slice(0, 18),
+        ...shuffledDeck.slice(0, 18)
       );
       shuffledDeck = [...cardInUse]
         .sort(() => Math.random() - 0.5)

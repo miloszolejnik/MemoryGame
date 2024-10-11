@@ -12,15 +12,12 @@ export const DifficultyLvlCard = ({
     changeDifficulty(difficulty);
   };
 
-  const bacground =
-    difficulty === Difficulty.EASY
-      ? style['Card--easy']
-      : difficulty === Difficulty.MEDIUM
-        ? style['Card--medium']
-        : style['Card--hard'];
-
   return (
-    <div className={`${style.Card} ${bacground}`} onClick={handleClick}>
+    <div
+      className={`${style.Card}`}
+      data-difficulty={difficulty}
+      onClick={handleClick}
+    >
       <h2>{difficulty}</h2>
     </div>
   );

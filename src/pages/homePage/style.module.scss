@@ -7,8 +7,8 @@
   text-align: center;
 
   .CardContainer {
-    display: flex;
-    max-width: 60%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     justify-content: center;
     align-items: center;
     padding: 1rem 2rem;

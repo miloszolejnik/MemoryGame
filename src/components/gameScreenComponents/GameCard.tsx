@@ -1,97 +1,49 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMemoryGameStore } from '../../store/store';
 import { CardStructure } from '../../types/gameSettings';
 import { cardThemes } from '../../utils/cardDecs';
+import { useTimer } from '../../utils/useTimer';
+import { handleCardClick } from '../../utils/gameLogic';
 import style from './style.module.scss';
+
 export const GameCard = ({
   card,
   disable,
   setDisable,
+  allCardsMatched,
 }: {
   card: CardStructure;
   disable: boolean;
   setDisable: (value: boolean) => void;
+  allCardsMatched: boolean;
 }) => {
   const [error, setError] = useState(false);
   const reverse =
     cardThemes[useMemoryGameStore((state) => state.cardTheme)].cardBackround;
   const currentCardsInUse = useMemoryGameStore((state) => state.cardsInUse);
   const selectedCard = useMemoryGameStore((state) => state.selectedCard);
-  const moves = useMemoryGameStore((state) => state.moves);
+  const time = useMemoryGameStore((state) => state.time);
+  const { startTimer, stopTimer } = useTimer(() => {});
 
-  if (!card.id) {
-    return null;
-  }
+  useEffect(() => {
+    if (allCardsMatched) {
+      stopTimer();
+    }
+  }, [allCardsMatched, stopTimer]);
 
   const handleClick = () => {
-    if (disable) return;
-
-    setDisable(true);
-
-    if (!card.isFlipped || !card.isMatched) {
-      const updatedCardsInUse = currentCardsInUse.map((c) => {
-        if (c.id === card.id) {
-          return { ...c, isFlipped: true };
-        }
-        return c;
-      });
-
-      useMemoryGameStore.setState({
-        cardsInUse: updatedCardsInUse,
-        moves: moves + 1,
-      });
-
-      if (!selectedCard) {
-        useMemoryGameStore.setState({ selectedCard: card.backgroundImage });
-        setDisable(false);
-        return;
-      }
-
-      if (selectedCard === card.backgroundImage) {
-        const matchedCards = currentCardsInUse.map((c) => {
-          if (
-            c.backgroundImage === selectedCard ||
-            c.backgroundImage === card.backgroundImage
-          ) {
-            return { ...c, isMatched: true, isFlipped: true };
-          }
-          return c;
-        });
-        useMemoryGameStore.setState({
-          cardsInUse: matchedCards,
-          selectedCard: null,
-        });
-        setDisable(false);
-        return;
-      }
-
-      if (selectedCard !== card.backgroundImage) {
-        setTimeout(() => {
-          const resetFlippedCards = currentCardsInUse.map((c) => {
-            if (
-              c.backgroundImage === selectedCard ||
-              c.backgroundImage === card.backgroundImage
-            ) {
-              return { ...c, isFlipped: false };
-            }
-            return c;
-          });
-          useMemoryGameStore.setState({
-            cardsInUse: resetFlippedCards,
-            selectedCard: null,
-          });
-          setDisable(false);
-        }, 1000);
-        return;
-      }
-    } else if (card.isMatched || card.isFlipped || disable) {
-      setError(true);
-      setTimeout(() => {
-        setError(false);
-      }, 500);
+    if (time === 0) {
+      startTimer();
     }
 
-    setDisable(false);
+    handleCardClick(
+      card,
+      disable,
+      currentCardsInUse,
+      selectedCard,
+      setDisable,
+      setError
+    );
   };
 
   const isGradient = card.backgroundImage.startsWith('linear-gradient');

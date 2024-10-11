@@ -1,9 +1,7 @@
 .GameSettings {
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem;
   gap: 1rem;
-  margin-bottom: 1rem;
   .Setting {
     display: flex;
     justify-content: space-between;
@@ -13,6 +11,7 @@
 .GameScene {
   display: grid;
   gap: 1rem;
+  margin-top: 1rem;
   justify-content: center;
   &[data-grid-size='4'] {
     --grid-columns: 4;
@@ -123,5 +122,21 @@
   }
   100% {
     transform: translateX(0);
+  }
+}
+
+.YouWin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    margin: 0;
+  }
+  button {
+    width: auto;
+    color: ghostwhite;
+    padding: 0.5rem 2rem;
+    border: solid 2px ghostwhite;
   }
 }

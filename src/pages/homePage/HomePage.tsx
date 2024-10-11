@@ -7,7 +7,7 @@ export function HomePage() {
 
   return (
     <div className={style.HomePage}>
-      <h1>Memory Game</h1>
+      <h1 className={style.bouncyFlickerTitle}>Memory Game</h1>
       <h2>Select Difficulty LvL</h2>
       <div className={style.CardContainer}>
         {difficulty.map((lvl) => (

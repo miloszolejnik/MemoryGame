@@ -37,7 +37,7 @@ import defaultBG from '../assets/defaultBG.svg';
 
 export const cardThemes = {
   SET_ONE: {
-    name: 'Set One',
+    name: '🚀✨Shapes and color🚀✨',
     cardBackround: defaultBG,
     cards: [
       {

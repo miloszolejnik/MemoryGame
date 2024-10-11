@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useMemoryGameStore } from '../store/store';
-import { CardTheme } from '../types/gameSettings';
+import { CardThemeSet } from '../types/gameSettings';
 
 export const useSelectTheme = () => {
   const navigate = useNavigate();
 
-  const changeTheme = (theme: CardTheme) => {
+  const changeTheme = (theme: CardThemeSet) => {
     useMemoryGameStore.setState({ cardTheme: theme });
     navigate('/game');
   };

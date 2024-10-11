@@ -1,5 +1,7 @@
 .ThemeCard {
+  border: solid 3px ghostwhite;
   width: 100%;
-  padding: 1rem 2rem;
-  background-color: pink;
+  h2 {
+    cursor: pointer;
+  }
 }

@@ -1,9 +1,11 @@
 import { useMemoryGameStore } from '../store/store';
-import { cardThemes } from './cardDecs';
 
 export function difficultyLevelGenerate() {
   const gameInfo = useMemoryGameStore.getState();
-  const selectedTheme = cardThemes[gameInfo.cardTheme];
+  const selectedTheme = gameInfo.cardTheme;
+  if (!selectedTheme) {
+    return;
+  }
   let shuffledDeck = [...selectedTheme.cards]
     .sort(() => Math.random() - 0.5)
     .map((card) => ({ ...card, id: Math.random() }));

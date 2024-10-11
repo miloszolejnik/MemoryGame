@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useMemoryGameStore } from '../../store/store';
-import { CardStructure } from '../../types/gameSettings';
-import { cardThemes } from '../../utils/cardDecs';
+import { CardStructure, CardThemeSet } from '../../types/gameSettings';
 import { useTimer } from '../../utils/useTimer';
 import { handleCardClick } from '../../utils/gameLogic';
 import style from './style.module.scss';
@@ -18,8 +17,10 @@ export const GameCard = ({
   allCardsMatched: boolean;
 }) => {
   const [error, setError] = useState(false);
-  const reverse =
-    cardThemes[useMemoryGameStore((state) => state.cardTheme)].cardBackround;
+  const { cardBackround } = useMemoryGameStore(
+    (state) => state.cardTheme
+  ) as CardThemeSet;
+  const reverse = cardBackround;
   const currentCardsInUse = useMemoryGameStore((state) => state.cardsInUse);
   const selectedCard = useMemoryGameStore((state) => state.selectedCard);
   const time = useMemoryGameStore((state) => state.time);

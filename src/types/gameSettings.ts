@@ -8,12 +8,14 @@ export type CardStructure = {
   isFlipped: boolean;
 };
 
+export type CardThemeSet = {
+  name: string;
+  cardBackround: string;
+  cards: CardStructure[];
+};
+
 export type CardThemes = {
-  [key in CardTheme]: {
-    name: string;
-    cardBackround: string;
-    cards: CardStructure[];
-  };
+  [key in CardTheme]: CardThemeSet;
 };
 
 export enum Difficulty {
@@ -34,7 +36,7 @@ export type MemoryGameState = {
   time: number;
   score: number;
   moves: number;
-  cardTheme: CardTheme;
+  cardTheme: CardThemeSet | null;
   selectedCard: string | null;
   cardsInUse: CardStructure[];
   setDifficulty: (difficulty: Difficulty) => void;

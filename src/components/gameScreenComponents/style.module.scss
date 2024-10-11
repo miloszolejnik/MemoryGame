@@ -25,14 +25,14 @@
     --grid-columns: 8;
   }
 
-  grid-template-columns: repeat(var(--grid-columns), minmax(0, 10rem));
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 7rem));
 }
 
 .GameCardContainer {
   position: relative;
   display: flex;
-  max-height: 10rem;
-  max-width: 10rem;
+  max-height: 7rem;
+  max-width: 7rem;
   min-height: 1rem;
   min-width: 1rem;
   width: auto;
@@ -49,8 +49,6 @@
 
 .GameCard {
   position: relative;
-  top: 0;
-  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,13 +58,6 @@
   background-position: center;
   transform: rotateY(90deg);
   transition: all 0.2s ease-in;
-
-  &[data-card-background-type='gradient'] {
-    background: var(--background-value);
-  }
-  &[data-card-background-type='image'] {
-    background-image: var(--background-value);
-  }
 
   .iconContainer {
     display: flex;
@@ -130,6 +121,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 1rem;
   h1 {
     margin: 0;
   }

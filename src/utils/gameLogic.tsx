@@ -1,5 +1,6 @@
 import { CardStructure } from '../types/gameSettings';
 import { useMemoryGameStore } from '../store/store';
+import { saveGameState } from '../utils/gameSave';
 
 export const handleCardClick = (
   card: CardStructure,
@@ -28,8 +29,11 @@ export const handleCardClick = (
       moves: moves + 1,
     });
 
+    saveGameState(useMemoryGameStore.getState());
+
     if (!selectedCard) {
       useMemoryGameStore.setState({ selectedCard: card.backgroundImage });
+      saveGameState(useMemoryGameStore.getState());
       setDisable(false);
       return;
     }
@@ -48,6 +52,8 @@ export const handleCardClick = (
         cardsInUse: matchedCards,
         selectedCard: null,
       });
+
+      saveGameState(useMemoryGameStore.getState());
 
       setDisable(false);
       return;
@@ -68,6 +74,7 @@ export const handleCardClick = (
           cardsInUse: resetFlippedCards,
           selectedCard: null,
         });
+        saveGameState(useMemoryGameStore.getState());
         setDisable(false);
       }, 1000);
       return;

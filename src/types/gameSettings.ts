@@ -1,9 +1,7 @@
-import { ReactElement } from 'react';
-
 export type CardStructure = {
   backgroundImage: string;
-  icon: ReactElement | string;
-  id: number;
+  icon: string;
+  id?: number;
   isMatched: boolean;
   isFlipped: boolean;
 };
@@ -27,8 +25,8 @@ export enum Difficulty {
 export enum CardTheme {
   SET_ONE = 'SET_ONE',
   SET_TWO = 'SET_TWO',
-  SET_THREE = 'SET_THREE',
-  SET_CUSTOM = 'SET_CUSTOM',
+  // SET_THREE = 'SET_THREE',
+  // SET_CUSTOM = 'SET_CUSTOM',
 }
 
 export type MemoryGameState = {
@@ -39,11 +37,11 @@ export type MemoryGameState = {
   cardTheme: CardThemeSet | null;
   selectedCard: string | null;
   cardsInUse: CardStructure[];
-  setDifficulty: (difficulty: Difficulty) => void;
-  setTime: (time: number) => void;
-  setScore: (score: number) => void;
-  setMoves: (moves: number) => void;
-  setCardTheme: (cardTheme: CardTheme) => void;
-  setSelectedCard: (selectedCard: string | null) => void;
-  setCardsInUse: (cardsInUse: CardStructure[]) => void;
+  setDifficulty?: (difficulty: Difficulty) => void;
+  setTime?: (time: number) => void;
+  setScore?: (score: number) => void;
+  setMoves?: (moves: number) => void;
+  setCardTheme?: (cardTheme: CardTheme) => void;
+  setSelectedCard?: (selectedCard: string | null) => void;
+  setCardsInUse?: (cardsInUse: CardStructure[]) => void;
 };

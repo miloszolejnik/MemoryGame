@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useMemoryGameStore } from '../store/store';
+import { saveGameState } from '../utils/gameSave';
 
 export const useTimer = (onEnd: () => void) => {
   const [intervalId, setIntervalId] = useState<number | null>(null);
@@ -9,6 +10,7 @@ export const useTimer = (onEnd: () => void) => {
       const id = window.setInterval(() => {
         const time = useMemoryGameStore.getState().time;
         useMemoryGameStore.setState({ time: time + 1 });
+        saveGameState(useMemoryGameStore.getState());
       }, 1000);
       setIntervalId(id);
     }

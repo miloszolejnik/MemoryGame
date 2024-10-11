@@ -1,12 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useMemoryGameStore } from '../../store/store';
 import { CardStructure } from '../../types/gameSettings';
-import { difficultyLevelGenerate } from '../../utils/difficultyLevelGenerate';
 import { GameCard } from './GameCard';
 import style from './style.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { loadGameState } from '../../utils/gameSave';
+
 export const GameScene = () => {
   const [disable, setDisable] = useState(false);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true); // Track loading state
+
+  useEffect(() => {
+    const localdata = loadGameState();
+
+    if (localdata && localdata.cardsInUse && localdata.cardsInUse.length > 0) {
+      useMemoryGameStore.setState({ cardsInUse: localdata.cardsInUse });
+    } else {
+      navigate('/');
+    }
+
+    setIsLoading(false); // Set loading to false after processing
+  }, [navigate]);
+
+  const gameTable = useMemoryGameStore((state) => state.cardsInUse);
+  const allCardsMatched = gameTable.every((c) => c.isMatched);
 
   let gridSize;
   switch (useMemoryGameStore.getState().difficulty) {
@@ -24,15 +42,9 @@ export const GameScene = () => {
         `Invalid difficulty level: ${useMemoryGameStore.getState().difficulty}`
       );
   }
-  useEffect(() => {
-    difficultyLevelGenerate();
-  }, []);
 
-  const gameTable = useMemoryGameStore((state) => state.cardsInUse);
-  const allCardsMatched = gameTable.every((c) => c.isMatched);
-  const navigate = useNavigate();
-  if (!gameTable) {
-    return null;
+  if (isLoading || !gameTable) {
+    return null; // Optionally, you can return a loading indicator here
   }
 
   return (

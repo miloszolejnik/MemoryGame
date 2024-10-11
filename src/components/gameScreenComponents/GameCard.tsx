@@ -4,6 +4,7 @@ import { CardStructure, CardThemeSet } from '../../types/gameSettings';
 import { useTimer } from '../../utils/useTimer';
 import { handleCardClick } from '../../utils/gameLogic';
 import style from './style.module.scss';
+import { getIconElement } from '../../utils/iconUtils';
 
 export const GameCard = ({
   card,
@@ -47,21 +48,22 @@ export const GameCard = ({
     );
   };
 
-  const isGradient = card.backgroundImage.startsWith('linear-gradient');
-  const isImageUrl =
+  let backgroundStyle: React.CSSProperties = {};
+
+  if (card.backgroundImage.startsWith('linear-gradient')) {
+    backgroundStyle = {
+      background: card.backgroundImage,
+    };
+  } else if (
     card.backgroundImage.startsWith('http') ||
-    card.backgroundImage.startsWith('data:image');
-
-  const backgroundType = isGradient
-    ? 'gradient'
-    : isImageUrl
-      ? 'image'
-      : 'none';
-  const backgroundValue = card.backgroundImage;
-
-  const customStyle: React.CSSProperties = {
-    '--background-value': backgroundValue,
-  } as React.CSSProperties & { '--background-value'?: string };
+    card.backgroundImage.startsWith('/src/assets')
+  ) {
+    backgroundStyle = {
+      backgroundImage: `url(${card.backgroundImage})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+  }
 
   return (
     <div
@@ -73,15 +75,14 @@ export const GameCard = ({
       }}
     >
       <div className={style.GameCardReverse}>
-        <img src={reverse} />
+        <img src={reverse} alt="Card reverse" />
       </div>
       <div
         className={style.GameCard}
         data-card-id={card.id}
-        data-card-background-type={backgroundType}
-        style={customStyle}
+        style={backgroundStyle}
       >
-        <span className={style.iconContainer}>{card.icon}</span>
+        <span className={style.iconContainer}>{getIconElement(card.icon)}</span>
       </div>
     </div>
   );

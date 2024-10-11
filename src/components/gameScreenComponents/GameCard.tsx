@@ -11,11 +11,15 @@ export const GameCard = ({
   disable,
   setDisable,
   allCardsMatched,
+  isRunning,
+  setIsRunning,
 }: {
   card: CardStructure;
   disable: boolean;
   setDisable: (value: boolean) => void;
   allCardsMatched: boolean;
+  isRunning: boolean;
+  setIsRunning: (value: boolean) => void;
 }) => {
   const [error, setError] = useState(false);
   const { cardBackround } = useMemoryGameStore(
@@ -24,7 +28,6 @@ export const GameCard = ({
   const reverse = cardBackround;
   const currentCardsInUse = useMemoryGameStore((state) => state.cardsInUse);
   const selectedCard = useMemoryGameStore((state) => state.selectedCard);
-  const time = useMemoryGameStore((state) => state.time);
   const { startTimer, stopTimer } = useTimer(() => {});
 
   useEffect(() => {
@@ -34,7 +37,9 @@ export const GameCard = ({
   }, [allCardsMatched, stopTimer]);
 
   const handleClick = () => {
-    if (time === 0) {
+    if (!isRunning) {
+      console.log(isRunning);
+      setIsRunning(true);
       startTimer();
     }
 

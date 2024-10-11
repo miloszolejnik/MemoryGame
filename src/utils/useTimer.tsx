@@ -4,9 +4,8 @@ import { saveGameState } from '../utils/gameSave';
 
 export const useTimer = (onEnd: () => void) => {
   const [intervalId, setIntervalId] = useState<number | null>(null);
-
   const startTimer = () => {
-    if (!intervalId) {
+    if (!intervalId || intervalId === null) {
       const id = window.setInterval(() => {
         const time = useMemoryGameStore.getState().time;
         useMemoryGameStore.setState({ time: time + 1 });

@@ -10,6 +10,7 @@ export const GameScene = () => {
   const [disable, setDisable] = useState(false);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true); // Track loading state
+  const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
     const localdata = loadGameState();
@@ -63,6 +64,8 @@ export const GameScene = () => {
             disable={disable}
             setDisable={setDisable}
             allCardsMatched={allCardsMatched}
+            isRunning={isRunning}
+            setIsRunning={setIsRunning}
           />
         ))}
       </div>

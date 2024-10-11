@@ -76,7 +76,7 @@ export const GameCard = ({
             ${card.isFlipped ? style.flipped : ''}`}
       data-card-error={error}
       onClick={() => {
-        if (!disable) handleClick();
+        if (!card.isFlipped) if (!disable) handleClick();
       }}
     >
       <div className={style.GameCardReverse}>
